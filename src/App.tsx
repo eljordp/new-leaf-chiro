@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, ChevronDown, Menu, X, Heart, Shield, Star, Users, Award } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, ChevronDown, Menu, X, Heart, Shield, Star, Users, Award, Leaf, CheckCircle } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -36,9 +36,9 @@ function App() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-10 text-sm tracking-wide text-bark-light">
             <a href="#services" className="hover:text-leaf transition-colors">Services</a>
+            <a href="#conditions" className="hover:text-leaf transition-colors">Conditions</a>
             <a href="#location" className="hover:text-leaf transition-colors">Location</a>
             <a href="#about" className="hover:text-leaf transition-colors">About</a>
-            <a href="#values" className="hover:text-leaf transition-colors">Values</a>
             <a
               href="tel:+18182359818"
               className="bg-leaf text-white px-5 py-2.5 rounded-full text-sm hover:bg-leaf-dark transition-colors"
@@ -69,9 +69,9 @@ function App() {
             >
               <div className="flex flex-col px-4 py-4 gap-4">
                 <a href="#services" onClick={() => setMenuOpen(false)} className="text-bark-light text-base py-2">Services</a>
+                <a href="#conditions" onClick={() => setMenuOpen(false)} className="text-bark-light text-base py-2">Conditions</a>
                 <a href="#location" onClick={() => setMenuOpen(false)} className="text-bark-light text-base py-2">Location</a>
                 <a href="#about" onClick={() => setMenuOpen(false)} className="text-bark-light text-base py-2">About</a>
-                <a href="#values" onClick={() => setMenuOpen(false)} className="text-bark-light text-base py-2">Values</a>
                 <a
                   href="tel:+18182359818"
                   className="bg-leaf text-white text-center px-5 py-3 rounded-full text-base font-medium"
@@ -183,6 +183,127 @@ function App() {
                   </span>
                 </motion.div>
               ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Conditions Treated */}
+      <section id="conditions" className="bg-warm py-16 sm:py-24 lg:py-36">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+          >
+            <motion.p
+              variants={fadeUp}
+              className="text-leaf font-medium tracking-widest uppercase text-[10px] sm:text-xs mb-3 sm:mb-4"
+            >
+              What We Treat
+            </motion.p>
+            <motion.h2
+              variants={fadeUp}
+              className="font-serif text-3xl sm:text-4xl lg:text-5xl text-bark tracking-tight mb-4 sm:mb-6"
+            >
+              Conditions We Treat
+            </motion.h2>
+            <motion.p
+              variants={fadeUp}
+              className="text-bark-light/70 text-base sm:text-lg max-w-xl mb-10 sm:mb-16 leading-relaxed"
+            >
+              From spinal injuries to chronic pain, we treat a wide range
+              of conditions with hands-on care tailored to your recovery.
+            </motion.p>
+
+            <motion.div variants={fadeUp} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 sm:gap-x-12 gap-y-4 sm:gap-y-5">
+              {[
+                "Herniated Discs",
+                "Spinal Stenosis",
+                "Posture Issues",
+                "Extremity Pain",
+                "Back Pain",
+                "Neck Pain",
+                "Sciatica",
+                "Arthritis",
+                "Sports Injuries",
+                "Headaches & Migraines",
+                "Scoliosis",
+                "Joint Dysfunction",
+              ].map((condition, i) => (
+                <div key={i} className="flex items-center gap-3">
+                  <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-leaf shrink-0" />
+                  <span className="text-bark text-sm sm:text-base font-medium">{condition}</span>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Homeopathic Remedies — Differentiator */}
+      <section id="remedies" className="py-16 sm:py-24 lg:py-36">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+          >
+            <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center">
+              <div>
+                <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-leaf/10 text-leaf px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-6">
+                  <Leaf className="w-4 h-4" />
+                  What Sets Us Apart
+                </motion.div>
+                <motion.h2
+                  variants={fadeUp}
+                  className="font-serif text-3xl sm:text-4xl lg:text-5xl text-bark tracking-tight mb-6 sm:mb-8"
+                >
+                  Homeopathic
+                  <br />
+                  FDA-Approved Remedies
+                </motion.h2>
+                <motion.p
+                  variants={fadeUp}
+                  className="text-bark-light/80 text-base sm:text-lg leading-relaxed mb-5 sm:mb-6"
+                >
+                  Unlike other clinics, Dr. Catherine handcrafts FDA-approved
+                  homeopathic tinctures, salves, and herbal supplements — giving
+                  patients a natural path to healing alongside chiropractic care.
+                </motion.p>
+                <motion.p
+                  variants={fadeUp}
+                  className="text-bark-light/60 text-base sm:text-lg leading-relaxed"
+                >
+                  These remedies support treatment for a variety of conditions
+                  and complement your in-office care with at-home relief.
+                </motion.p>
+              </div>
+
+              <motion.div variants={fadeUp}>
+                <div className="bg-warm rounded-xl sm:rounded-2xl p-6 sm:p-10">
+                  <h3 className="font-serif text-xl sm:text-2xl text-bark mb-6 sm:mb-8">
+                    Remedies Available For
+                  </h3>
+                  <div className="space-y-4 sm:space-y-5">
+                    {[
+                      { name: "PCOS", type: "Tinctures & Supplements" },
+                      { name: "Arthritis", type: "Salves & Tinctures" },
+                      { name: "Diabetes Support", type: "Herbal Supplements" },
+                      { name: "Back Pain", type: "Salves & Topicals" },
+                      { name: "Inflammation", type: "Tinctures & Supplements" },
+                      { name: "Chronic Pain", type: "Full Remedy Line" },
+                    ].map((remedy, i) => (
+                      <div key={i} className="flex items-center justify-between py-2 border-b border-sand/60 last:border-0">
+                        <span className="text-bark font-medium text-sm sm:text-base">{remedy.name}</span>
+                        <span className="text-bark-light/50 text-xs sm:text-sm ml-4">{remedy.type}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
