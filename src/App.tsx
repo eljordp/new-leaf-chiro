@@ -26,22 +26,22 @@ function App() {
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-sand/60">
         <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-6 py-4 lg:px-12">
-          <a href="#" className="font-serif text-xl lg:text-2xl text-leaf-dark tracking-tight">
-            New Leaf<span className="text-leaf-light"> Chiropractic</span>
+          <a href="#">
+            <img src="/logo.png" alt="New Leaf Chiropractic LA" className="h-10 lg:h-12 w-auto" />
           </a>
           <div className="hidden md:flex items-center gap-10 text-sm tracking-wide text-bark-light">
             <a href="#services" className="hover:text-leaf transition-colors">Services</a>
             <a href="#location" className="hover:text-leaf transition-colors">Location</a>
             <a href="#about" className="hover:text-leaf transition-colors">About</a>
             <a
-              href="tel:+13101234567"
+              href="tel:+18182359818"
               className="bg-leaf text-white px-5 py-2.5 rounded-full text-sm hover:bg-leaf-dark transition-colors"
             >
               Book Now
             </a>
           </div>
           <a
-            href="tel:+13101234567"
+            href="tel:+18182359818"
             className="md:hidden bg-leaf text-white px-4 py-2 rounded-full text-sm"
           >
             Call
@@ -83,7 +83,7 @@ function App() {
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
               <a
-                href="tel:+13101234567"
+                href="tel:+18182359818"
                 className="bg-leaf text-white px-8 py-4 rounded-full text-base font-medium hover:bg-leaf-dark transition-colors"
               >
                 Schedule Your Visit
@@ -309,7 +309,7 @@ function App() {
             </motion.p>
             <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
               <a
-                href="tel:+13101234567"
+                href="tel:+18182359818"
                 className="bg-white text-leaf-dark px-8 py-4 rounded-full text-base font-medium hover:bg-cream transition-colors flex items-center gap-2"
               >
                 <Phone className="w-4 h-4" /> Call Now
@@ -328,9 +328,7 @@ function App() {
       {/* Footer */}
       <footer className="bg-warm py-12">
         <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-bark-light/60">
-          <p className="font-serif text-bark text-base">
-            New Leaf<span className="text-leaf"> Chiropractic</span> LA
-          </p>
+          <img src="/logo.png" alt="New Leaf Chiropractic LA" className="h-8 w-auto" />
           <p>11645 Wilshire Blvd, Brentwood, Los Angeles</p>
           <p>&copy; {new Date().getFullYear()} New Leaf Chiropractic LA</p>
         </div>
