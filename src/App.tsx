@@ -405,38 +405,53 @@ function App() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
-            className="max-w-3xl"
           >
-            <motion.p
-              variants={fadeUp}
-              className="text-leaf font-medium tracking-widest uppercase text-[10px] sm:text-xs mb-3 sm:mb-4"
-            >
-              About
-            </motion.p>
-            <motion.h2
-              variants={fadeUp}
-              className="font-serif text-3xl sm:text-4xl lg:text-5xl text-bark tracking-tight mb-6 sm:mb-8"
-            >
-              Dr. Catherine Shegolevskaya
-            </motion.h2>
-            <motion.p
-              variants={fadeUp}
-              className="text-bark-light/80 text-base sm:text-lg leading-relaxed mb-5 sm:mb-6"
-            >
-              Dr. Catherine Shegolevskaya founded New Leaf Chiropractic to provide
-              high-quality, patient-centered care that promotes healing. She delivers
-              compassionate, evidence-based treatment that prioritizes patient experience,
-              safety, and satisfaction in every visit.
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              className="text-bark-light/60 text-base sm:text-lg leading-relaxed"
-            >
-              Whether you're recovering from an injury, managing chronic pain,
-              or simply looking to move and feel better, every visit is tailored
-              to your needs. Clinical excellence, attentive listening, and ethical
-              practice guide every adjustment.
-            </motion.p>
+            <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20 items-center">
+              <motion.div variants={fadeUp}>
+                <div className="aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden">
+                  <img
+                    src="/catherine.jpg"
+                    alt="Dr. Catherine Shegolevskaya"
+                    className="w-full h-full object-cover object-top"
+                  />
+                </div>
+              </motion.div>
+
+              <div>
+                <motion.p
+                  variants={fadeUp}
+                  className="text-leaf font-medium tracking-widest uppercase text-[10px] sm:text-xs mb-3 sm:mb-4"
+                >
+                  About
+                </motion.p>
+                <motion.h2
+                  variants={fadeUp}
+                  className="font-serif text-3xl sm:text-4xl lg:text-5xl text-bark tracking-tight mb-6 sm:mb-8"
+                >
+                  Dr. Catherine
+                  <br />
+                  Shegolevskaya
+                </motion.h2>
+                <motion.p
+                  variants={fadeUp}
+                  className="text-bark-light/80 text-base sm:text-lg leading-relaxed mb-5 sm:mb-6"
+                >
+                  Dr. Catherine Shegolevskaya founded New Leaf Chiropractic to provide
+                  high-quality, patient-centered care that promotes healing. She delivers
+                  compassionate, evidence-based treatment that prioritizes patient experience,
+                  safety, and satisfaction in every visit.
+                </motion.p>
+                <motion.p
+                  variants={fadeUp}
+                  className="text-bark-light/60 text-base sm:text-lg leading-relaxed"
+                >
+                  Whether you're recovering from an injury, managing chronic pain,
+                  or simply looking to move and feel better, every visit is tailored
+                  to your needs. Clinical excellence, attentive listening, and ethical
+                  practice guide every adjustment.
+                </motion.p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
