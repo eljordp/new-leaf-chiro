@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Phone, Mail, MapPin, Clock, ChevronDown, Menu, X, Heart, Shield, Star, Users, Award } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -21,18 +22,23 @@ const services = [
 ];
 
 function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       {/* Nav */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/90 backdrop-blur-md border-b border-sand/60">
-        <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-6 py-4 lg:px-12">
+        <div className="w-full max-w-7xl mx-auto flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 lg:px-12">
           <a href="#">
-            <img src="/logo.png" alt="New Leaf Chiropractic LA" className="h-10 lg:h-12 w-auto" />
+            <img src="/logo.png" alt="New Leaf Chiropractic LA" className="h-8 sm:h-10 lg:h-12 w-auto" />
           </a>
+
+          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-10 text-sm tracking-wide text-bark-light">
             <a href="#services" className="hover:text-leaf transition-colors">Services</a>
             <a href="#location" className="hover:text-leaf transition-colors">Location</a>
             <a href="#about" className="hover:text-leaf transition-colors">About</a>
+            <a href="#values" className="hover:text-leaf transition-colors">Values</a>
             <a
               href="tel:+18182359818"
               className="bg-leaf text-white px-5 py-2.5 rounded-full text-sm hover:bg-leaf-dark transition-colors"
@@ -40,19 +46,48 @@ function App() {
               Book Now
             </a>
           </div>
-          <a
-            href="tel:+18182359818"
-            className="md:hidden bg-leaf text-white px-4 py-2 rounded-full text-sm"
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden p-2 text-bark"
+            aria-label="Toggle menu"
           >
-            Call
-          </a>
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile menu dropdown */}
+        <AnimatePresence>
+          {menuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="md:hidden overflow-hidden bg-cream border-t border-sand/60"
+            >
+              <div className="flex flex-col px-4 py-4 gap-4">
+                <a href="#services" onClick={() => setMenuOpen(false)} className="text-bark-light text-base py-2">Services</a>
+                <a href="#location" onClick={() => setMenuOpen(false)} className="text-bark-light text-base py-2">Location</a>
+                <a href="#about" onClick={() => setMenuOpen(false)} className="text-bark-light text-base py-2">About</a>
+                <a href="#values" onClick={() => setMenuOpen(false)} className="text-bark-light text-base py-2">Values</a>
+                <a
+                  href="tel:+18182359818"
+                  className="bg-leaf text-white text-center px-5 py-3 rounded-full text-base font-medium"
+                >
+                  Call (818) 235-9818
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center pt-20">
+      <section className="relative min-h-[85vh] sm:min-h-screen flex items-center pt-16 sm:pt-20">
         <div className="absolute inset-0 bg-gradient-to-b from-warm via-cream to-cream" />
-        <div className="relative w-full max-w-7xl mx-auto px-6 lg:px-12 py-24 lg:py-32">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-16 sm:py-24 lg:py-32">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -61,13 +96,13 @@ function App() {
           >
             <motion.p
               variants={fadeUp}
-              className="text-leaf font-medium tracking-widest uppercase text-xs mb-6"
+              className="text-leaf font-medium tracking-widest uppercase text-[10px] sm:text-xs mb-4 sm:mb-6"
             >
               Brentwood, Los Angeles
             </motion.p>
             <motion.h1
               variants={fadeUp}
-              className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-bark leading-[1.05] tracking-tight mb-8"
+              className="font-serif text-[2.5rem] leading-[1.08] sm:text-6xl lg:text-7xl xl:text-8xl text-bark sm:leading-[1.05] tracking-tight mb-5 sm:mb-8"
             >
               A fresh start
               <br />
@@ -75,22 +110,22 @@ function App() {
             </motion.h1>
             <motion.p
               variants={fadeUp}
-              className="text-lg lg:text-xl text-bark-light/80 leading-relaxed max-w-xl mb-12"
+              className="text-base sm:text-lg lg:text-xl text-bark-light/80 leading-relaxed max-w-xl mb-8 sm:mb-12"
             >
               Expert chiropractic care in the heart of Brentwood.
               Hands-on treatment to relieve pain, restore mobility,
               and help you feel like yourself again.
             </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <a
                 href="tel:+18182359818"
-                className="bg-leaf text-white px-8 py-4 rounded-full text-base font-medium hover:bg-leaf-dark transition-colors"
+                className="bg-leaf text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-base font-medium hover:bg-leaf-dark transition-colors text-center"
               >
                 Schedule Your Visit
               </a>
               <a
                 href="#services"
-                className="border border-bark/20 text-bark px-8 py-4 rounded-full text-base font-medium hover:bg-bark/5 transition-colors flex items-center gap-2"
+                className="border border-bark/20 text-bark px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-base font-medium hover:bg-bark/5 transition-colors flex items-center justify-center gap-2"
               >
                 View Services <ChevronDown className="w-4 h-4" />
               </a>
@@ -100,29 +135,29 @@ function App() {
       </section>
 
       {/* Services */}
-      <section id="services" className="py-24 lg:py-36">
-        <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
+      <section id="services" className="py-16 sm:py-24 lg:py-36">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
           >
             <motion.p
               variants={fadeUp}
-              className="text-leaf font-medium tracking-widest uppercase text-xs mb-4"
+              className="text-leaf font-medium tracking-widest uppercase text-[10px] sm:text-xs mb-3 sm:mb-4"
             >
               What We Offer
             </motion.p>
             <motion.h2
               variants={fadeUp}
-              className="font-serif text-4xl lg:text-5xl text-bark tracking-tight mb-6"
+              className="font-serif text-3xl sm:text-4xl lg:text-5xl text-bark tracking-tight mb-4 sm:mb-6"
             >
               Services & Pricing
             </motion.h2>
             <motion.p
               variants={fadeUp}
-              className="text-bark-light/70 text-lg max-w-xl mb-16 leading-relaxed"
+              className="text-bark-light/70 text-base sm:text-lg max-w-xl mb-10 sm:mb-16 leading-relaxed"
             >
               Transparent pricing. No surprises. Every session is tailored
               to your body and your goals.
@@ -133,17 +168,17 @@ function App() {
                 <motion.div
                   key={i}
                   variants={fadeUp}
-                  className="flex items-baseline justify-between py-6 lg:py-8 border-b border-sand group hover:bg-warm/50 px-4 -mx-4 transition-colors rounded"
+                  className="flex items-baseline justify-between py-4 sm:py-6 lg:py-8 border-b border-sand group hover:bg-warm/50 px-3 sm:px-4 -mx-3 sm:-mx-4 transition-colors rounded"
                 >
-                  <div>
-                    <h3 className="text-lg lg:text-xl text-bark font-medium">
+                  <div className="min-w-0 mr-4">
+                    <h3 className="text-base sm:text-lg lg:text-xl text-bark font-medium">
                       {service.name}
                     </h3>
                     {service.note && (
-                      <p className="text-sm text-bark-light/60 mt-1">{service.note}</p>
+                      <p className="text-xs sm:text-sm text-bark-light/60 mt-0.5 sm:mt-1">{service.note}</p>
                     )}
                   </div>
-                  <span className="font-serif text-2xl lg:text-3xl text-leaf-dark ml-8 shrink-0">
+                  <span className="font-serif text-xl sm:text-2xl lg:text-3xl text-leaf-dark shrink-0">
                     {service.price}
                   </span>
                 </motion.div>
@@ -154,33 +189,33 @@ function App() {
       </section>
 
       {/* Location */}
-      <section id="location" className="bg-bark text-white py-24 lg:py-36">
-        <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
+      <section id="location" className="bg-bark text-white py-16 sm:py-24 lg:py-36">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
           >
             <motion.p
               variants={fadeUp}
-              className="text-leaf-light font-medium tracking-widest uppercase text-xs mb-4"
+              className="text-leaf-light font-medium tracking-widest uppercase text-[10px] sm:text-xs mb-3 sm:mb-4"
             >
               Find Us
             </motion.p>
             <motion.h2
               variants={fadeUp}
-              className="font-serif text-4xl lg:text-5xl tracking-tight mb-16"
+              className="font-serif text-2xl sm:text-4xl lg:text-5xl tracking-tight mb-10 sm:mb-16"
             >
               Wilshire West Medical Tower
             </motion.h2>
 
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+            <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20">
               <motion.div variants={fadeUp}>
                 {/* Building image placeholder */}
-                <div className="aspect-[4/3] bg-bark-light/30 rounded-2xl overflow-hidden mb-8 flex items-center justify-center text-white/30 text-sm">
-                  <div className="text-center">
-                    <p className="text-lg mb-2">Building Photo</p>
+                <div className="aspect-[4/3] bg-bark-light/30 rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-8 flex items-center justify-center text-white/30 text-sm">
+                  <div className="text-center px-4">
+                    <p className="text-base sm:text-lg mb-2">Building Photo</p>
                     <p className="text-xs text-white/20">Replace with image of Wilshire West Medical Tower</p>
                   </div>
                 </div>
@@ -190,22 +225,22 @@ function App() {
                 </p>
               </motion.div>
 
-              <motion.div variants={fadeUp} className="space-y-10">
+              <motion.div variants={fadeUp} className="space-y-8 sm:space-y-10">
                 <div>
-                  <div className="flex items-start gap-4 mb-3">
-                    <MapPin className="w-5 h-5 text-leaf-light mt-1 shrink-0" />
+                  <div className="flex items-start gap-3 sm:gap-4 mb-3">
+                    <MapPin className="w-5 h-5 text-leaf-light mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium text-lg">11645 Wilshire Blvd</p>
-                      <p className="text-white/50">Brentwood, Los Angeles, CA</p>
+                      <p className="font-medium text-base sm:text-lg">11645 Wilshire Blvd</p>
+                      <p className="text-white/50 text-sm sm:text-base">Brentwood, Los Angeles, CA</p>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium tracking-widest uppercase text-leaf-light mb-4">
+                  <h3 className="text-xs sm:text-sm font-medium tracking-widest uppercase text-leaf-light mb-3 sm:mb-4">
                     Nearby Hospitals
                   </h3>
-                  <ul className="space-y-3 text-white/70">
+                  <ul className="space-y-2 sm:space-y-3 text-white/70 text-sm sm:text-base">
                     <li>UCLA Medical Center</li>
                     <li>St. John's Hospital</li>
                     <li>Cedars-Sinai Medical Center</li>
@@ -213,23 +248,23 @@ function App() {
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-medium tracking-widest uppercase text-leaf-light mb-4">
+                  <h3 className="text-xs sm:text-sm font-medium tracking-widest uppercase text-leaf-light mb-3 sm:mb-4">
                     Easy Access
                   </h3>
-                  <p className="text-white/70 leading-relaxed">
+                  <p className="text-white/70 leading-relaxed text-sm sm:text-base">
                     Minutes from the 405 and 10 freeway exits.
                     Convenient for patients across the Westside and Greater LA.
                   </p>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <Clock className="w-5 h-5 text-leaf-light mt-1 shrink-0" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <Clock className="w-5 h-5 text-leaf-light mt-0.5 shrink-0" />
                   <div>
-                    <p className="font-medium">Hours</p>
-                    <p className="text-white/50 text-sm mt-1">
+                    <p className="font-medium text-sm sm:text-base">Hours</p>
+                    <p className="text-white/50 text-xs sm:text-sm mt-1">
                       Mon – Fri: 9:00 AM – 6:00 PM
                       <br />
-                      Sat: By appointment
+                      Sat: 8:00 AM – 3:00 PM
                       <br />
                       Sun: Closed
                     </p>
@@ -242,52 +277,123 @@ function App() {
       </section>
 
       {/* About */}
-      <section id="about" className="py-24 lg:py-36">
-        <div className="w-full max-w-7xl mx-auto px-6 lg:px-12">
+      <section id="about" className="py-16 sm:py-24 lg:py-36">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: "-80px" }}
             variants={stagger}
             className="max-w-3xl"
           >
             <motion.p
               variants={fadeUp}
-              className="text-leaf font-medium tracking-widest uppercase text-xs mb-4"
+              className="text-leaf font-medium tracking-widest uppercase text-[10px] sm:text-xs mb-3 sm:mb-4"
             >
               About
             </motion.p>
             <motion.h2
               variants={fadeUp}
-              className="font-serif text-4xl lg:text-5xl text-bark tracking-tight mb-8"
+              className="font-serif text-3xl sm:text-4xl lg:text-5xl text-bark tracking-tight mb-6 sm:mb-8"
             >
-              Dr. Catherine
+              Dr. Catherine Shegolevskaya
             </motion.h2>
             <motion.p
               variants={fadeUp}
-              className="text-bark-light/80 text-lg leading-relaxed mb-6"
+              className="text-bark-light/80 text-base sm:text-lg leading-relaxed mb-5 sm:mb-6"
             >
-              With years of experience in chiropractic care, Dr. Catherine
-              founded New Leaf Chiropractic to give patients in Brentwood
-              and the greater Westside access to personalized, hands-on treatment
-              that addresses the root cause — not just the symptoms.
+              Dr. Catherine Shegolevskaya founded New Leaf Chiropractic to provide
+              high-quality, patient-centered care that promotes healing. She delivers
+              compassionate, evidence-based treatment that prioritizes patient experience,
+              safety, and satisfaction in every visit.
             </motion.p>
             <motion.p
               variants={fadeUp}
-              className="text-bark-light/60 text-lg leading-relaxed"
+              className="text-bark-light/60 text-base sm:text-lg leading-relaxed"
             >
               Whether you're recovering from an injury, managing chronic pain,
               or simply looking to move and feel better, every visit is tailored
-              to your needs. No cookie-cutter adjustments. No unnecessary upsells.
-              Just good care.
+              to your needs. Clinical excellence, attentive listening, and ethical
+              practice guide every adjustment.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
+      {/* Mission, Vision & Values */}
+      <section id="values" className="bg-warm py-16 sm:py-24 lg:py-36">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={stagger}
+          >
+            <motion.p
+              variants={fadeUp}
+              className="text-leaf font-medium tracking-widest uppercase text-[10px] sm:text-xs mb-3 sm:mb-4"
+            >
+              What We Stand For
+            </motion.p>
+            <motion.h2
+              variants={fadeUp}
+              className="font-serif text-3xl sm:text-4xl lg:text-5xl text-bark tracking-tight mb-12 sm:mb-16"
+            >
+              Mission, Vision & Values
+            </motion.h2>
+
+            {/* Mission & Vision */}
+            <div className="grid md:grid-cols-2 gap-8 sm:gap-12 mb-12 sm:mb-16">
+              <motion.div variants={fadeUp}>
+                <h3 className="font-serif text-xl sm:text-2xl text-bark mb-4">Our Mission</h3>
+                <p className="text-bark-light/70 text-sm sm:text-base leading-relaxed">
+                  To provide high-quality, patient-centered care that promotes healing.
+                  We deliver compassionate, evidence-based medical services that prioritize
+                  patient experience, safety, and satisfaction. We promote clinical excellence,
+                  attentive listening, and ethical practice to improve the health of every
+                  patient that comes in through the door.
+                </p>
+              </motion.div>
+              <motion.div variants={fadeUp}>
+                <h3 className="font-serif text-xl sm:text-2xl text-bark mb-4">Our Vision</h3>
+                <p className="text-bark-light/70 text-sm sm:text-base leading-relaxed">
+                  To be a trusted healthcare practice known for exceptional patient care,
+                  clinical excellence, and meaningful relationships. We aspire to create an
+                  environment where patients feel respected, informed, and empowered in their
+                  healthcare journey. Our team continuously grows in skill, professionalism,
+                  and dedication to service.
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Values */}
+            <motion.div variants={fadeUp}>
+              <h3 className="font-serif text-xl sm:text-2xl text-bark mb-6 sm:mb-8">Our Values</h3>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                {[
+                  { icon: Heart, title: "Patient-Centered Care", desc: "We place patients at the heart of everything we do, respecting their needs, preferences, and individuality." },
+                  { icon: Shield, title: "Medical Integrity & Ethics", desc: "We practice honesty, responsibility, and transparency in all clinical interactions." },
+                  { icon: Star, title: "Excellence", desc: "We maintain the highest standards of medical care, clinical skill, and professionalism." },
+                  { icon: Award, title: "Compassion", desc: "We treat every patient, family member, and colleague with compassion, kindness, and dignity." },
+                  { icon: Users, title: "Teamwork", desc: "We foster an environment that enhances communication, efficiency, and patient outcomes." },
+                ].map((value, i) => (
+                  <div key={i} className="flex gap-4">
+                    <value.icon className="w-5 h-5 text-leaf mt-0.5 shrink-0" />
+                    <div>
+                      <h4 className="text-bark font-medium text-sm sm:text-base mb-1.5">{value.title}</h4>
+                      <p className="text-bark-light/60 text-xs sm:text-sm leading-relaxed">{value.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section className="bg-leaf py-24 lg:py-32">
-        <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 text-center">
+      <section className="bg-leaf py-16 sm:py-24 lg:py-32">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -296,27 +402,27 @@ function App() {
           >
             <motion.h2
               variants={fadeUp}
-              className="font-serif text-4xl lg:text-5xl text-white tracking-tight mb-6"
+              className="font-serif text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-4 sm:mb-6"
             >
               Ready for a fresh start?
             </motion.h2>
             <motion.p
               variants={fadeUp}
-              className="text-white/70 text-lg mb-12 max-w-md mx-auto"
+              className="text-white/70 text-base sm:text-lg mb-8 sm:mb-12 max-w-md mx-auto"
             >
               Call to schedule your first visit, or stop by the
               Wilshire West Medical Tower in Brentwood.
             </motion.p>
-            <motion.div variants={fadeUp} className="flex flex-wrap justify-center gap-4">
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
               <a
                 href="tel:+18182359818"
-                className="bg-white text-leaf-dark px-8 py-4 rounded-full text-base font-medium hover:bg-cream transition-colors flex items-center gap-2"
+                className="bg-white text-leaf-dark px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-base font-medium hover:bg-cream transition-colors flex items-center justify-center gap-2"
               >
-                <Phone className="w-4 h-4" /> Call Now
+                <Phone className="w-4 h-4" /> Call (818) 235-9818
               </a>
               <a
-                href="mailto:info@newleafchirola.com"
-                className="border border-white/30 text-white px-8 py-4 rounded-full text-base font-medium hover:bg-white/10 transition-colors flex items-center gap-2"
+                href="mailto:newleafchirola@gmail.com"
+                className="border border-white/30 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full text-base font-medium hover:bg-white/10 transition-colors flex items-center justify-center gap-2"
               >
                 <Mail className="w-4 h-4" /> Email Us
               </a>
@@ -326,10 +432,10 @@ function App() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-warm py-12">
-        <div className="w-full max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-bark-light/60">
-          <img src="/logo.png" alt="New Leaf Chiropractic LA" className="h-8 w-auto" />
-          <p>11645 Wilshire Blvd, Brentwood, Los Angeles</p>
+      <footer className="bg-warm py-8 sm:py-12">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 flex flex-col items-center gap-4 sm:gap-6 md:flex-row md:justify-between text-sm text-bark-light/60">
+          <img src="/logo.png" alt="New Leaf Chiropractic LA" className="h-7 sm:h-8 w-auto" />
+          <p className="text-center md:text-left">11645 Wilshire Blvd, Brentwood, Los Angeles</p>
           <p>&copy; {new Date().getFullYear()} New Leaf Chiropractic LA</p>
         </div>
       </footer>
