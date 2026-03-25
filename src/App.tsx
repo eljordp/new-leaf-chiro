@@ -333,17 +333,32 @@ function App() {
 
             <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-20">
               <motion.div variants={fadeUp}>
-                {/* Building image placeholder */}
-                <div className="aspect-[4/3] bg-bark-light/30 rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-8 flex items-center justify-center text-white/30 text-sm">
-                  <div className="text-center px-4">
-                    <p className="text-base sm:text-lg mb-2">Building Photo</p>
-                    <p className="text-xs text-white/20">Replace with image of Wilshire West Medical Tower</p>
-                  </div>
+                {/* Building photo */}
+                <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-6 sm:mb-8">
+                  <img
+                    src="/building.jpg"
+                    alt="Wilshire West Medical Tower - 11645 Wilshire Blvd, Brentwood"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <p className="text-white/60 text-sm leading-relaxed">
+                <p className="text-white/60 text-sm leading-relaxed mb-8">
                   Located inside the prestigious Wilshire West Medical Tower —
                   a recognized medical hub in the heart of Brentwood.
                 </p>
+
+                {/* Google Maps Embed */}
+                <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.3!2d-118.4715!3d34.0485!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bb8c4e4b6d5f%3A0x4e3f0e8e8b8b8b8b!2s11645%20Wilshire%20Blvd%2C%20Los%20Angeles%2C%20CA%2090025!5e0!3m2!1sen!2sus!4v1"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="New Leaf Chiropractic LA location"
+                  />
+                </div>
               </motion.div>
 
               <motion.div variants={fadeUp} className="space-y-8 sm:space-y-10">
